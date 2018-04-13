@@ -1,4 +1,5 @@
 const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
+const YOUTUBE_LINK_URL = 'https://youtu.be/'
 
 function getDataFromApi(searchTerm, callback) {
   const query = {
@@ -9,18 +10,24 @@ function getDataFromApi(searchTerm, callback) {
   $.getJSON(YOUTUBE_SEARCH_URL, query, callback);
 }
 
-function renderResult(result) {
+function createVideoMarkup(item) {
   return `
-    <div class=video-name>${result.snippet.title}</div>
-    <a href=${result.snippet.thumbnails.medium.url}>
-        <img class=thumbnails src=${result.snippet.thumbnails.medium.url} alt=${result.snippet.title}>
-    </a>
+    <div class="videoResult">
+        <h3 class="video-name">${item.snippet.title}</div>
+        <a href=\"${YOUTUBE_LINK_URL + item.id.videoId}\">
+            <img class="thumbnails" src=\"${item.snippet.thumbnails.medium.url}\" alt=\"${item.snippet.title}\">
+        </a>
+    </div>
   `;
 }
 
 function displaySearchData(data) {
-  const results = data.items.map((item, index) => renderResult(item));
-  $('.js-search-results').html(results);
+  const items = data.items.map((item, index) => {
+    if(item.id.kind === 'youtube#video') {
+     return createVideoMarkup(item);
+    }
+  });
+  $('.js-search-results').html(items);
 }
 
 function watchSubmit() {
