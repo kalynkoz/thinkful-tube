@@ -39,6 +39,7 @@ function watchSubmit() {
     queryTarget.val("");
     getDataFromApi(query, displaySearchData);
   });
+  .prop('hidden', false);
 }
 
 $(watchSubmit);

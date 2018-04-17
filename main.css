@@ -6,3 +6,32 @@
     width: 30%;
     height: 30%;
 }
+
+h1 {
+    background: #360036;
+    color: #fff;
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.search {
+    font-size: 12px;
+}
+
+button {
+    font-size: 12px;
+}
+
+h3, h2 {
+    color: #360036;
+}
+
+.user a:hover,
+.user a:focus,
+.search input:focus,
+.search button:focus {
+  outline: 5px dotted salmon;
+}
